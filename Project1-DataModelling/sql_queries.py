@@ -11,8 +11,8 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 songplay_table_create = ("""
 CREATE TABLE IF NOT EXISTS songplays(
     songplay_id SERIAL PRIMARY KEY, 
-    start_time bigint NOT NULL, 
-    user_id int NOT NULL, 
+    start_time bigint, 
+    user_id int, 
     level varchar, 
     song_id varchar, 
     artist_id varchar, 
@@ -100,8 +100,8 @@ on conflict(start_time) do nothing
 
 song_select = ("""
 SELECT S.song_id, A.artist_id  \
-FROM artists A JOIN songs S ON S.artist_id = A.artist_id \
-WHERE S.title = %s AND A.name=%s AND S.duration =%s ;
+FROM artists JOIN songs ON songs.artist_id = artists.artist_id \
+WHERE songs.title = %s AND artists.name=%s AND songs.duration =%s ;
 """
 )
 
