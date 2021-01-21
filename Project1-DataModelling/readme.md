@@ -20,8 +20,8 @@
 | COLUMN  	| TYPE  	| CONSTRAINT  	|
 |---	|---	|---	|	
 |   songplay_id	| SERIAL  	|   PRIMARY KEY	| 
-|   start_time	|   bigint	|   NOT NULL	| 
-|   user_id	|   int	|   NOT NULL	| 
+|   start_time	|   bigint	|   | 
+|   user_id	|   int	|   	| 
 |   level	|   varchar |   	| 
 |   song_id	|   varchar	|   	| 
 |   artist_id	|   varchar	|   	| 
