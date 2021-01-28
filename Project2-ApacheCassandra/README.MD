@@ -11,5 +11,12 @@ We basically create a Cassandra database creating queries on song play to answer
 In this project: we apply what I've learnt on data modelling with Apache Cassandra and complete an ETL pipeline using python. To complete, is is needed to create tables, provide part of pipeline to transfer data from CSV file within a directory(here is event_data folder) to model and insert data into Apache Cassandra tables
 
 ## 2. Dataset
+For this project, we worked with one dataset `event_data`. This directory of CSV files partitioned by date.
+
+Ex:
+`event_data/2018-11-08-events.csv
+
+event_data/2018-11-09-events.csv`
+
 ## 3. Project Template
 ## 4. Project Steps
