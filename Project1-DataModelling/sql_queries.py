@@ -11,8 +11,8 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 songplay_table_create = ("""
 CREATE TABLE IF NOT EXISTS songplays(
     songplay_id SERIAL PRIMARY KEY, 
-    start_time bigint, 
-    user_id int, 
+    start_time bigint NOT NULL, 
+    user_id int NOT NULL, 
     level varchar, 
     song_id varchar, 
     artist_id varchar, 
@@ -65,16 +65,17 @@ songplay_table_insert = ("""
 INSERT INTO songplays(start_time, user_id, level, song_id, artist_id, session_id, location, user_agent)\
 VALUES(%s,%s,%s,%s,%s,%s,%s,%s)
 """)
-
+#update level for existing records when there is a conflict, but your code says "DO NOTHING".
 user_table_insert = ("""
  INSERT INTO users(user_id, first_name, last_name, gender, level) \
  VALUES(%s,%s,%s,%s,%s)
- on conflict(user_id) do nothing
+ ON CONFLICT (user_id) DO UPDATE SET level=EXCLUDED.level
  """)
 
 song_table_insert = ("""
 INSERT INTO songs(song_id, title, artist_id, year, duration) \
 VALUES(%s,%s,%s,%s,%s)
+on conflict(song_id) do nothing
 """)
 
 artist_table_insert = ("""
@@ -100,8 +101,8 @@ on conflict(start_time) do nothing
 
 song_select = ("""
 SELECT S.song_id, A.artist_id  \
-FROM artists JOIN songs ON songs.artist_id = artists.artist_id \
-WHERE songs.title = %s AND artists.name=%s AND songs.duration =%s ;
+FROM artists A JOIN songs S ON S.artist_id = A.artist_id \
+WHERE S.title = %s AND A.name=%s AND S.duration =%s ;
 """
 )
 
